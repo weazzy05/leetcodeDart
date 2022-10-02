@@ -1,0 +1,5 @@
+const maxInt32 = 2147483647;
+const minInt32 = -2147483648;
+
+const minInt64 = -9223372036854775808;
+const maxInt64 = 9223372036854775807;
