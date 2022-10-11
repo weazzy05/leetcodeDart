@@ -24,8 +24,9 @@ class Solution {
       res.add(str);
       return;
     }
-    for (int j = 0; j < map[digits[index]]!.length; j++) {
-      backTracking(index + 1, str + map[digits[index]]![j], digits);
+    String digit = digits[index];
+    for (int j = 0; j < map[digit]!.length; j++) {
+      backTracking(index + 1, str + map[digit]![j], digits);
     }
   }
 }

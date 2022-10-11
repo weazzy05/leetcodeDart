@@ -7,11 +7,12 @@ class Solution {
     int maxRes = 0;
     for (var i = 0; i < nums.length; i++) {
       if (nums[i] == 0) ZeroCount++;
-      if (ZeroCount > k) {
+      while (ZeroCount > k) {
         if (nums[l++] == 0) ZeroCount--;
       }
+
       if (ZeroCount <= k) {
-        maxRes = max(maxRes, i - l);
+        maxRes = max(maxRes, i - l + 1);
       }
     }
     return maxRes;

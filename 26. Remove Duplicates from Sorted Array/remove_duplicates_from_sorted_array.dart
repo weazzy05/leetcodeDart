@@ -1,17 +1,13 @@
 class Solution {
   int removeDuplicates(List<int> nums) {
-    int l = 0;
-    // int r = 0;
-
+    int insetIndex = 1;
     for (var i = 1; i < nums.length; i++) {
-      if (nums[l] == nums[i]) {
-        nums.removeAt(i);
-        i--;
-      } else {
-        l = i;
+      if (nums[i] != nums[i - 1]) {
+        nums[insetIndex] = nums[i];
+        insetIndex++;
       }
     }
-    return (nums.length);
+    return insetIndex;
   }
 }
 
