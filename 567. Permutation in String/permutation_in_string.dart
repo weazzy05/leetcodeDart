@@ -1,4 +1,48 @@
 class Solution {
+  bool checkInclusion2(String s1, String s2) {
+    if (s1.length > s2.length) return false;
+    List<int> s1map = List.filled(26, 0);
+    List<int> s2map = List.filled(26, 0);
+    for (int i = 0; i < s1.length; i++) {
+      s1map[letterIndex(s1[i])]++;
+      s2map[letterIndex(s2[i])]++;
+    }
+
+    int count = 0;
+    for (int i = 0; i < 26; i++) {
+      if (s1map[i] == s2map[i]) count++;
+    }
+
+    for (int i = 0; i < s2.length - s1.length; i++) {
+      int r = letterIndex(s2[i + s1.length]);
+      int l = letterIndex(s2[i]);
+      if (count == 26) return true;
+      s2map[r]++;
+      if (s2map[r] == s1map[r]) {
+        count++;
+      } else if (s2map[r] == s1map[r] + 1) {
+        count--;
+      }
+      s2map[l]--;
+      if (s2map[l] == s1map[l]) {
+        count++;
+      } else if (s2map[l] == s1map[l] - 1) {
+        count--;
+      }
+    }
+    return count == 26;
+  }
+
+  int letterIndex(String symbol) {
+    final unitCode = unitCodeSym(symbol.codeUnits);
+    final firstCode = unitCodeSym('a'.codeUnits);
+    return unitCode - firstCode;
+  }
+
+  int unitCodeSym(List<int> unitCode) {
+    return unitCode.first;
+  }
+
   bool checkInclusion(String s1, String s2) {
     Map<String, int> countS1 = Map();
 
