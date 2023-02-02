@@ -12,10 +12,8 @@ class Solution {
     '9': 'wxyz'
   };
   List<String> letterCombinations(String digits) {
+    if (digits == '') return res;
     backTracking(0, '', digits);
-    for (int i = 0; i < res.length; i++) {
-      if (res[i] == '') res.removeAt(i);
-    }
     return res;
   }
 
