@@ -1,54 +1,19 @@
 class Solution {
-  List<int> sortedSquares(List<int> nums) {
-    List<int> negativeArray = [];
-    // List<int> res = [];
-    int i = 0;
-    while (nums.length > i && nums[i] < 0) {
-      negativeArray.add(nums[i]);
-      i++;
-    }
-    List<int> posArray = nums.sublist(i, nums.length);
-    List<int> sortedList = negativeArray.reversed.toList();
-    int n = sortedList.length;
-    for (var i = 0; i < n + posArray.length; i++) {
-      if (i < sortedList.length) {
-        sortedList[i] *= -1;
+  List<int> sortedSquares2(List<int> nums) {
+    int n = nums.length;
+    List<int> res = List.generate(n, (_) => 0);
+    int l = 0;
+    int r = n - 1;
+    for (int i = n - 1; i >= 0; i--) {
+      if (nums[l].abs() > nums[r].abs()) {
+        res[i] = nums[l] * nums[l];
+        l++;
       } else {
-        sortedList.add(0);
+        res[i] = nums[r] * nums[r];
+        r--;
       }
     }
-    merge(sortedList, n, posArray, posArray.length);
-    for (var i = 0; i < sortedList.length; i++) {
-      sortedList[i] = sortedList[i] * sortedList[i];
-    }
-    return sortedList;
-  }
-
-  void merge(List<int> nums1, int m, List<int> nums2, int n) {
-    m = m - 1;
-    n = n - 1;
-    int length = nums1.length - 1;
-    while (m >= 0 || n >= 0) {
-      if (m < 0 || n < 0) {
-        if (m < 0) {
-          nums1[length] = nums2[n];
-          n--;
-        } else {
-          nums1[length] = nums1[m];
-          m--;
-        }
-      } else {
-        if (nums1[m] >= nums2[n]) {
-          nums1[length] = nums1[m];
-          m--;
-        } else {
-          nums1[length] = nums2[n];
-          n--;
-        }
-      }
-
-      length--;
-    }
+    return res;
   }
 }
 
